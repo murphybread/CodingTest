@@ -1,26 +1,36 @@
 function solution(numbers, target) {
     var answer = 0;
     const maxDepth = numbers.length
+    const operation = [+1 , -1]
+    const arr = []
     
-    function dfs (depth, sum){
-        // console.log(` depth ${depth} sum ${sum}`)
-       if (depth === maxDepth) {
-            // 합계가 타겟과 같으면 answer 증가
-            if (sum === target) {
-                answer++;
-            }
-            return;
+    function dfs (value, depth){
+        if (depth === maxDepth ) {
+            arr.push(value)
+            return 
         }
         
+        let originalValue = value  // 원본 value 저장
         
         // +연산
-        dfs(depth + 1, sum + numbers[depth]);
-        // -연산
-        dfs(depth + 1, sum - numbers[depth]);
+        value = originalValue + numbers[depth]*operation[0]
+        dfs(value , depth+1)
+        
+        // - 연산
+        value = originalValue + numbers[depth]*operation[1]
+        dfs(value , depth+1)
     }
-    dfs ( 0,0)
 
-    
+    // 첫 번째 숫자의 + 케이스
+    dfs(numbers[0], 1)
+    // 첫 번째 숫자의 - 케이스
+    dfs(-numbers[0], 1)
+
+    for (let e of arr){
+        if (e === target){
+            answer +=1
+        }
+    }
     
     return answer;
 }
