@@ -8,7 +8,7 @@ left join
     Transactions t
     on t.visit_id = v.visit_id
 where
-    t.visit_id is null
+    t.transaction_id  is null
 group by
     customer_id
 
