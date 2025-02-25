@@ -28,7 +28,7 @@ FROM
 LEFT JOIN 
     ExamCount ec ON ss.student_id = ec.student_id AND ss.subject_name = ec.subject_name
 GROUP BY
-    ss.student_id, ss.student_name, ss.subject_name
+    ss.student_id, ss.student_name, ss.subject_name 
 ORDER BY 
     ss.student_id, ss.subject_name;
 
