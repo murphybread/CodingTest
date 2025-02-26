@@ -5,16 +5,20 @@
  */
 var twoSum = function(numbers, target) {
     let left = 0
-    let right = 1
+    let right = numbers.length -1
     let sum = numbers[left] + numbers[right]
 
-    let time = 0
-    for(let i = 0;  i <numbers.length -1 ; i++){
-        for(let j = i+1; j<numbers.length ;j++){
-            if(numbers[i] + numbers[j] === target )  return [i+1,j+1]
+    while(sum !== target){
+        if (sum < target){
+            sum -= numbers[left]
+            left += 1
+            sum += numbers[left]
+        } else{
+            sum -= numbers[right]
+            right -=1
+            sum += numbers[right]
         }
     }
-
     
-    
+    return [left+1, right+1]
 };
