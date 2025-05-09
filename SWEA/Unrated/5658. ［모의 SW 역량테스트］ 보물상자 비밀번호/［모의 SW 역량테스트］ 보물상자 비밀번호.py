@@ -21,8 +21,7 @@ print(c, d, e)                          실수형 변수 3개 출력하는 예�
 print(f)                                문자열 1개 출력하는 예제
 '''
 
-# import sys
-from collections import deque
+
 
 '''
       아래의 구문은 input.txt 를 read only 형식으로 연 후,
@@ -35,33 +34,52 @@ from collections import deque
 
       단, 채점을 위해 코드를 제출하실 때에는 반드시 아래 구문을 지우거나 주석 처리 하셔야 합니다.
 '''
-# sys.stdin = open("input.txt", "r")
+
 
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
-    # ///////////////////////////////////////////////////////////////////////////////////
-
+    N,K = map(int,input().split())
+    original = input()
     
-    N, K =  map(int, input().split())
+    
+    # print(int('1B3',16))
+    
+    n = N//4
     s = set()
-    n = N // 4
-    numbers =input()
-
-    queue = deque(numbers)
-
     for i in range(n):
-        for j in range(0, N, n):
-            rotated = numbers[i:] + numbers[:i]
-            hex_num = rotated[j:j+n]
-            s.add(hex_num)
+        # front = original[N-i:]
+        # back =  original[:N-i]
+        # print(front, back)
         
+        part = original[N-i:]  + original[:N-i]
+        
+        for j in range(0,N,n):
+            number = part[j:j+n]
+            if number not in s:
+                s.add(number)
+        # print(s)
+    
+    s_list = list(s)
+    num_list = []
+    
+    for num in s_list:
+        num_list.append(int(num,16))
+    num_list.sort(reverse=True)
+    
+    print(f'#{test_case} {num_list[K-1]}')
+        
+    
+    # ///////////////////////////////////////////////////////////////////////////////////
+    '''
+    
+    n = N//4 번 돌리기 
+    n단위로 짜르기
+    origian[N-i:]  + origianal[:N-i]
+    
+    set={}
 
-    queue_list = list(s)
-    sorted_queue = sorted(queue_list, key=lambda x: int(x, 16), reverse=True)
-    k_number = int(sorted_queue[K-1], 16)
+        이 부분에 여러분의 알고리즘 구현이 들어갑니다.
 
-    print(f"#{test_case} {k_number}")         
-
-
+    '''
     # ///////////////////////////////////////////////////////////////////////////////////
