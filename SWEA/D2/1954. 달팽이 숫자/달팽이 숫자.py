@@ -33,40 +33,65 @@ print(f)                                문자열 1개 출력하는 예제
 아래 구문을 사용하기 위해서는 import sys가 필요합니다.
 단, 채점을 위해 코드를 제출하실 때에는 반드시 아래 구문을 지우거나 주석 처리 하셔야 합니다.
 '''
-# import sys
-# sys.stdin = open("input.txt", "r")
+#import sys
+#sys.stdin = open("input.txt", "r")
 
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
-    # ///////////////////////////////////////////////////////////////////////////////////
-    N = int(input())
-    arr = [[0] * N for _ in range(N)]
+    N =int(input())
+    
+    board = [[0]*N for _ in range(N)]
+    # print(board)
+    
+    
+    dir = [(0,1),(1,0),(0,-1),(-1,0)]
+    i =0
+    j = 0
+    idx = 0
+    end = N**2 +1
+    # print(N)
+    # print(end)
+    for k in range(1,end):
+        nx = i+dir[idx][0]
+        ny = j+dir[idx][1]
+        
+        board[i][j] = k
+        if idx == 0:
+            if ny <N and board[nx][ny] == 0:
+                j +=1
+            else:
+                i+=1
+                idx = 1
+        elif idx == 1:
+            if nx < N and board[nx][ny] == 0:
+                i +=1
+            else:
+                j-=1
+                idx = 2
+        elif idx == 2:
+            if ny >=0 and board[nx][ny] == 0:
+                j -=1
+            else:
+                i -=1
+                idx = 3
+                
+        elif idx == 3:
+            if board[nx][ny] ==0:
+                i -= 1
+            else:
+                idx = 0
+                j+=1
+                
+    print(f'#{test_case}')
+    for b in board:
+        print(*b)
 
-    
-    i , j =  0 , 0
-    
-    
-    dir = [[0,1], [1,0], [0,-1], [-1,0]]
-    dir_idx = 0
         
-    for k in range(1, N*N + 1):
-        arr[i][j] = k
-        nx = i + dir[dir_idx][0]
-        ny = j + dir[dir_idx][1]
         
-        if nx < 0 or nx >= N or ny < 0 or ny >= N or arr[nx][ny] != 0:
-            dir_idx = (dir_idx + 1) % 4
-            nx = i + dir[dir_idx][0]
-            ny = j + dir[dir_idx][1]
-        i, j = nx,ny
-            
-    print(f"#{test_case}")
-    for row in arr:
-        print(*row)
-        
+    # ///////////////////////////////////////////////////////////////////////////////////
     '''
-	오른쪽, 아래, 왼쪽 위로 이동 구현
+
         이 부분에 여러분의 알고리즘 구현이 들어갑니다.
 
     '''
