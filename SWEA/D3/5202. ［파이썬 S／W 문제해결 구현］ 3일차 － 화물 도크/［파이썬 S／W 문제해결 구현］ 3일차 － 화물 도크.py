@@ -48,7 +48,7 @@ for test_case in range(1, T + 1):
         arr.append([s,e])
     # print(arr)
     
-    arr.sort()
+    # arr.sort()
     # print(arr)
     
     abc =[[3,3],[2,4], [1,5]]
