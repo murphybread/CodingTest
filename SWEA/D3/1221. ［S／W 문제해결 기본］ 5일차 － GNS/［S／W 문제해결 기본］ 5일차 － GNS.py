@@ -33,31 +33,33 @@ print(f)                                문자열 1개 출력하는 예제
 아래 구문을 사용하기 위해서는 import sys가 필요합니다.
 단, 채점을 위해 코드를 제출하실 때에는 반드시 아래 구문을 지우거나 주석 처리 하셔야 합니다.
 '''
-#import sys
-#sys.stdin = open("input.txt", "r")
+
 
 T = int(input())
-dict ={ "ZRO": 0, "ONE": 1, "TWO": 2, "THR": 3, "FOR": 4, "FIV": 5, "SIX": 6, "SVN": 7, "EGT": 8, "NIN": 9 }
-reverse_dict ={ 0: "ZRO", 1: "ONE", 2: "TWO", 3: "THR", 4: "FOR", 5: "FIV", 6: "SIX", 7: "SVN", 8: "EGT", 9: "NIN" }
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
-    
-    A= input().split()
-    N = int(A[1])
-    
-    line = list(input().split())
+    a = ["ZRO", "ONE", "TWO", "THR", "FOR", "FIV", "SIX", "SVN", "EGT", "NIN"]
     arr = []
-    for word in line:
-        
-        arr.append(dict[word])
+    sorted_arr = []
+    test = input().split()
+    N = int(test[1])
+    original = list(input().split())
+    
+    
+    for o in original:
+        arr.append(a.index(o))
+    print(len(arr))
     arr.sort()
     
-    answer = []
     
-    for num in arr:
-        answer.append(reverse_dict[num])
-    a = ' '.join(answer)
-    print(f'#{test_case} {a}')
+    for w in arr:
+        sorted_arr.append(a[w])
+    
+    print(f'#{test_case}')
+    print(*sorted_arr)
+    
+    
+    
     # ///////////////////////////////////////////////////////////////////////////////////
     '''
 
