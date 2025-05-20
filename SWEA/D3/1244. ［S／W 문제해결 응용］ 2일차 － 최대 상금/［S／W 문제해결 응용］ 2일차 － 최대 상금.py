@@ -41,19 +41,19 @@ T = int(input())
 for test_case in range(1, T + 1):
     num, m = map(int,input().split())
     arr = list(str(num))
-    visited = set()
+    visited = []
     max_value = 0
     def dfs(current, count):
         global max_value,m
 
         
-        current_state_tuple = (tuple(current), count)
+        current_state_tuple = (current.copy(), count)
 
         
         if current_state_tuple in visited:
             return
         
-        visited.add((tuple(current),count))    
+        visited.append(current_state_tuple)    
         # print(current, count)
                 
         if count == m:
