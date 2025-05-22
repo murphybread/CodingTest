@@ -66,7 +66,7 @@ for test_case in range(1, T + 1):
     while queue:
         
         
-        path,cnt = queue.pop()
+        path,cnt = queue.popleft()
         x = path[0]
         y = path[1]
         
