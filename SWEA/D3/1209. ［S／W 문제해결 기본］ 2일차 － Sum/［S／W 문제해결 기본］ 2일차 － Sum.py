@@ -33,51 +33,47 @@ print(f)                                문자열 1개 출력하는 예제
 아래 구문을 사용하기 위해서는 import sys가 필요합니다.
 단, 채점을 위해 코드를 제출하실 때에는 반드시 아래 구문을 지우거나 주석 처리 하셔야 합니다.
 '''
-# import sys
-# sys.stdin = open("input.txt", "r")
 
-# T = int(input())
+
+T = 10
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
-for test_case in range(1, 10 + 1):
-    
-    n = int(input())
-    size = 100
-    arr = []
-    answer = 0
-    for _ in range(100):
-        
+for test_case in range(1, T + 1):
+    size =100
+    n =int(input())
+    board = []
+    for _ in range(size):
         line = list(map(int,input().split()))
-        arr.append(line)
+        board.append(line)
+    result = []
+    
+    for row in board:
+        result.append(sum(row))
+    
+    trans =[list(col) for col in list(zip(*board))]    
+    
+    for row in trans:
+        result.append(sum(row))
         
-    for row in arr:
-        answer = max(answer, sum(row))
         
-        
-    cross = [[],[]]
+    arrow =[]
+    r_arrow = []
     for i in range(size):
         for j in range(size):
-            if (i == j):
-                cross[0].append(arr[i][j])
-            if (i + j == size - 1):
-                cross[1].append(arr[i][j])
-                
-    for i in range(size):
-        for j in range(size):
-            if (i> j):
-                arr[i][j], arr[j][i] = arr[j][i], arr[i][j]
+            if i == j:
+                arrow.append(board[i][j])
+            elif i+j == size-1:
+                r_arrow.append(board[i][j])
+    result.append(sum(arrow))
+    result.append(sum(r_arrow))
+    
+    print(f'#{test_case} {max(result)}')
             
-
-    for col in arr:
-        answer = max(answer, sum(col))
-
-
-                
-    answer = max(answer, sum(cross[0]), sum(cross[1]))
-        
         
     
+    # ///////////////////////////////////////////////////////////////////////////////////
+    '''
 
+        이 부분에 여러분의 알고리즘 구현이 들어갑니다.
 
-    
-    
-    print(f"#{test_case} {answer}")
+    '''
+    # ///////////////////////////////////////////////////////////////////////////////////
