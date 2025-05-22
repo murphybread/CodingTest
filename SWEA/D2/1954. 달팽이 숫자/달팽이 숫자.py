@@ -33,62 +33,66 @@ print(f)                                문자열 1개 출력하는 예제
 아래 구문을 사용하기 위해서는 import sys가 필요합니다.
 단, 채점을 위해 코드를 제출하실 때에는 반드시 아래 구문을 지우거나 주석 처리 하셔야 합니다.
 '''
-#import sys
-#sys.stdin = open("input.txt", "r")
+
 
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
-    N =int(input())
-    
+    N = int(input())
+    K = N**2
     board = [[0]*N for _ in range(N)]
     # print(board)
     
     
+    i,j  = 0,0
     dir = [(0,1),(1,0),(0,-1),(-1,0)]
-    i =0
-    j = 0
     idx = 0
-    end = N**2 +1
-    # print(N)
-    # print(end)
-    for k in range(1,end):
-        nx = i+dir[idx][0]
-        ny = j+dir[idx][1]
         
+        
+        
+         
+    
+    for k in range(1, K+1):
         board[i][j] = k
-        if idx == 0:
-            if ny <N and board[nx][ny] == 0:
-                j +=1
-            else:
-                i+=1
-                idx = 1
-        elif idx == 1:
-            if nx < N and board[nx][ny] == 0:
-                i +=1
-            else:
-                j-=1
-                idx = 2
-        elif idx == 2:
-            if ny >=0 and board[nx][ny] == 0:
-                j -=1
-            else:
-                i -=1
-                idx = 3
-                
-        elif idx == 3:
-            if board[nx][ny] ==0:
-                i -= 1
-            else:
-                idx = 0
-                j+=1
-                
+        
+        nx = i + dir[idx][0]
+        ny = j + dir[idx][1]
+        
+        
+        if idx ==0:
+            if ny >=N:
+                idx = (idx +1)%4
+            elif board[nx][ny] !=0 :
+                idx = (idx +1)%4
+        elif idx ==1:
+            if nx >=N :
+                idx = (idx +1)%4
+            elif board[nx][ny] !=0:
+                idx = (idx +1)%4
+        elif idx ==2:
+            if ny <0:
+                idx = (idx +1)%4
+            elif board[nx][ny] !=0:
+                idx = (idx +1)%4
+        elif idx ==3:
+            if nx < 0:
+                idx = (idx +1)%4
+            elif board[nx][ny] !=0:
+                idx = (idx +1)%4
+        # print(i,j,k)
+        # for b in board:
+        #     print(b)
+        # print("")                       
+        i = i + dir[idx][0]
+        j = j + dir[idx][1]
+        
+
+
     print(f'#{test_case}')
     for b in board:
         print(*b)
-
-        
-        
+    
+    
     # ///////////////////////////////////////////////////////////////////////////////////
     '''
 
