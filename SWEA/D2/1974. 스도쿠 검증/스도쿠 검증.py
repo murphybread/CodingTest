@@ -33,58 +33,61 @@ print(f)                                문자열 1개 출력하는 예제
 아래 구문을 사용하기 위해서는 import sys가 필요합니다.
 단, 채점을 위해 코드를 제출하실 때에는 반드시 아래 구문을 지우거나 주석 처리 하셔야 합니다.
 '''
-#import sys
-#sys.stdin = open("input.txt", "r")
+
 
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
-    flag = 1 
-    # 가로 검증
-    validate = [1,2,3,4,5,6,7,8,9]
+    SIZE = 9
     board = []
-    for _ in range(9):
-        row = list(map(int,input().split()))
-        board.append(row)
-        
-    if (flag):
-        for i in range(9):
-            line = board[i]
-            if (  validate != sorted(line) ):
-                flag = 0
-                break
-    if(flag):
-        for j in range(9):
-            column = []
-            for col in range(9):
-                column.append(board[col][j])
-            if ( validate != sorted(column) ):
-                flag = 0
-                break
-    if(flag):
-
-        for z in range(0,9,3):
-            for w in range(0, 9, 3):
-                three = []
-                for h in range(3):
-                    three.append( board[w+h][z : z+3])
-                flat = [num for row in three for num in row]
-                if (validate != sorted(flat)):
-                    flag = 0
-                    break
-                
-               
-
-    print(f"#{test_case} {flag}")
-                
-            
-        
-            
-        
-            
-    # 세로 검증
-    # 3*3  검증
     
+    
+    ans = [1,2,3,4,5,6,7,8,9]
+    flag = True
+    for _ in range(SIZE):
+        line = list(map(int,input().split()))
+        board.append(line)
+    
+    
+    for row in board:
+        
+        if sorted(row) != ans:
+            flag =False
+            
+            
+    
+    # print(flag)
+    # print(list(zip(*board)))
+    trans = [ list(col) for col in list(zip(*board))]
+    # print(trans)
+    for row in trans:
+        
+        if sorted(row) != ans:
+            flag =False
+            
+    # print(flag)
+    
+    
+    for i in range(0,SIZE-2,3):
+        for j in range(0,SIZE-2 ,3):
+            
+            start = (i,j)
+            part = []
+            for w in range(3):
+                for h in range(3):
+                    part.append(board[i+w][j+h])
+            part.sort()
+            if part != ans:
+                flag = False
+            # print("start", i,j ,part, flag)
+            
+            
+    
+    
+    
+    print(f'#{test_case} {int(flag)}')
+    
+    # break
     # ///////////////////////////////////////////////////////////////////////////////////
     '''
 
