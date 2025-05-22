@@ -34,6 +34,7 @@ print(f)                                문자열 1개 출력하는 예제
 단, 채점을 위해 코드를 제출하실 때에는 반드시 아래 구문을 지우거나 주석 처리 하셔야 합니다.
 '''
 
+
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
@@ -46,34 +47,32 @@ for test_case in range(1, T + 1):
     current_idx = 0
     charge = 0
     
-    for _ in range(N):
-        high_idx = 0
-        for jump in range(1,K+1):
+    while current_idx < N:
+        start_idx = current_idx
+        for jump in range(K, 0,-1):
             next_idx = current_idx +jump
             
             # print(current_idx , next_idx)        
             if next_idx >=N:
-                    flag =True            
+                    current_idx = N
                     break
-            if next_idx not in line:
-                continue
             else:
-                
-                high_idx = max(high_idx, next_idx)
-        # print("resut",current_idx , charge)
-        if high_idx == 0 or flag:
-            break    
-        current_idx = high_idx
-        charge +=1
+                if next_idx not in line:
+                    continue
+                else:
+                    current_idx =next_idx
+                    charge +=1
+                    break 
+        # print(current_idx,next_idx, charge)
+        if current_idx == start_idx:
+            charge = 0
+            break
+        current_idx = next_idx
+        
             
         
-        # print("current_idx", current_idx, "charge" ,charge)
-    # print("after" , charge)
-    # print(dp)
-    if not flag:
-        print(f'#{test_case} 0')
-    else:
-        print(f'#{test_case} {charge}')
+
+    print(f'#{test_case} {charge}')
             
             
             
