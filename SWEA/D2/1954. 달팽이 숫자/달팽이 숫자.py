@@ -39,58 +39,66 @@ T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
     N = int(input())
-    K = N**2
-    board = [[0]*N for _ in range(N)]
-    # print(board)
     
+    end = N*N
+    board =[[0] *N for _ in range(N)]
     
-    i,j  = 0,0
-    dir = [(0,1),(1,0),(0,-1),(-1,0)]
+    i,j =0,0
+    dir =  [(0,1),(1,0),(0,-1),(-1,0)]
     idx = 0
-        
-        
-        
-         
-    
-    for k in range(1, K+1):
+    for k in range(1,end+1):
         board[i][j] = k
         
-        nx = i + dir[idx][0]
-        ny = j + dir[idx][1]
-        
-        
-        if idx ==0:
+        nx = i+dir[idx][0]
+        ny = j+dir[idx][1]
+        # print(nx,ny)
+        if idx == 0:
             if ny >=N:
-                idx = (idx +1)%4
-            elif board[nx][ny] !=0 :
-                idx = (idx +1)%4
-        elif idx ==1:
-            if nx >=N :
-                idx = (idx +1)%4
+                ny-=1
+                nx+=1
+                idx =  (idx+1)%4
             elif board[nx][ny] !=0:
-                idx = (idx +1)%4
-        elif idx ==2:
+                ny-=1
+                nx+=1
+                idx =  (idx+1)%4
+            
+        elif idx == 1:
+            if nx >=N:
+                ny-=1
+                nx-=1
+                idx =  (idx+1)%4
+            elif board[nx][ny] !=0:
+                ny-=1
+                nx-=1
+                idx =  (idx+1)%4
+        elif idx == 2:
+            if ny < 0:
+                ny+=1
+                nx-=1
+                idx =  (idx+1)%4
+            elif board[nx][ny] !=0:
+                ny+=1
+                nx-=1
+                idx =  (idx+1)%4
+        elif idx == 3:
             if ny <0:
-                idx = (idx +1)%4
+                ny+=1
+                nx+=1
+                idx =  (idx+1)%4
             elif board[nx][ny] !=0:
-                idx = (idx +1)%4
-        elif idx ==3:
-            if nx < 0:
-                idx = (idx +1)%4
-            elif board[nx][ny] !=0:
-                idx = (idx +1)%4
-        # print(i,j,k)
+                ny+=1
+                nx+=1
+                idx =  (idx+1)%4
+        
+        i = nx
+        j = ny
         # for b in board:
         #     print(b)
-        # print("")                       
-        i = i + dir[idx][0]
-        j = j + dir[idx][1]
-        
-
 
     print(f'#{test_case}')
     for b in board:
         print(*b)
+    
     
     
     # ///////////////////////////////////////////////////////////////////////////////////
