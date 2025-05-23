@@ -38,39 +38,52 @@ print(f)                                문자열 1개 출력하는 예제
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
+    
+    
     size = 4
-    board = []
-    
-    s= set()
-        
+    board =[]
     for _ in range(size):
-        line = list(map(int,input().split()))
-        board.append(line)    
+        board.append(list(map(str,input().split())))
+    # print(board)
     
-    dir = [[-1,0],[1,0],[0,-1],[0,1]]
     
-    def backtracking(x,y,depth,curr):
-  
-        if (depth >= 6):
-            if(curr not in s):
-                s.add(curr)
-            return False
+    s = set()
+    
+    dir = [[0,1],[0,-1],[1,0],[-1,0]]
+    
+    def dfs (curr,x,y):
+        global s
+        
+        curr_tu  = tuple(curr)
+        
+        if curr_tu in s:
+            return
+        
+        
+        
+        if len(curr) == 7:
+            s.add(curr_tu)
+            return
         
         for dx,dy in dir:
-            nx = x+dx
-            ny = y+dy
-            
-            if ( (nx<0 or nx >=size) or(ny<0 or ny>=size)):
+            nx = x +dx
+            ny = y +dy
+            if nx <0 or nx>=size:
                 continue
+            if ny<0 or ny>=size:
+                continue
+            dfs(curr+list(board[nx][ny]),nx,ny)
             
-            backtracking(nx,ny,depth+1,curr+str(board[nx][ny]))
-
-
-    for i in range(4):
-        for j in range(4):
-            backtracking(i,j,0,str(board[i][j]))
+    
+    for i in range(size):
+        for j in range(size):
+            dfs(list(board[i][j]),i,j)
+    
+    # print(s, len(s))
     
     print(f'#{test_case} {len(s)}')
+        
+    
     # ///////////////////////////////////////////////////////////////////////////////////
     '''
 
