@@ -36,56 +36,59 @@ print(f)                                문자열 1개 출력하는 예제
 
 
 T = 10
-size = 100
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
-    a =int(input())
+    t =int(input())
     
-    def down(x,y):
-        
-        left = y-1
-        right =y+1
-        
-        while (left >0 and board[x][left] == 1):
-            left -= 1
-            x+=1
-            break
-        
-        
-        while(right >0 and board[x][right] == 1):
-            right+=1
-            x+=1
-            break
-        
-        
-        
-        
-        
-        
-        return 1
-    
+    size =100
     board =[]
     for _ in range(size):
-       line = list(map(int,input().split()))
-       board.append(line)
-    for j in range(size):
-        if board[99][j] == 2:
-            y = j
-            break
-    x = size-1
+        line =list(map(int,input().split()))
+        board.append(line)
+        
+    for i in range(99,size):
+        for j in range(size):
+            if board[i][j] == 2:
+                start = [i,j]
+    # print(start)
     
-    while x>0:
-        if y-1 >= 0 and board[x][y-1] == 1:
-            while y-1 >= 0 and board[x][y-1] == 1:
-                y-=1
-        elif y+1 < size and board[x][y+1] == 1:
-            while y+1 < size and board[x][y+1] == 1:
-                y += 1
-        x -=1
-    
+    x = start[0]
+    y = start[1]
+    while x > 0:
+        
+       
 
-    print(f'#{test_case} {y}')
+
     
+        
+        
+        if y-1 > 0 and board[x][y-1] == 1 :
+            while board[x][y-1] == 1:      
+                # print("move,left" ,x,y, board[x][y-1])      
+                y -= 1
+            x -=1
+            
+        elif y+1<size and board[x][y+1] == 1:
+            while board[x][y+1] == 1:
+                # print("move right")
+                
+                y +=1
+                if(y+1>=size):
+                    break
+            x -=1
+        else:
+            x-=1
+        
+
+            
+        if (x <= 0):
+            end = y
+            break
+            
+    # print(x,y,start,end)
+    
+    print(f'#{test_case} {end}')
+    # break
     # ///////////////////////////////////////////////////////////////////////////////////
     '''
 
