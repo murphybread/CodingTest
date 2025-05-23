@@ -33,67 +33,68 @@ print(f)                                문자열 1개 출력하는 예제
 아래 구문을 사용하기 위해서는 import sys가 필요합니다.
 단, 채점을 위해 코드를 제출하실 때에는 반드시 아래 구문을 지우거나 주석 처리 하셔야 합니다.
 '''
-# import sys
-# sys.stdin = open("input.txt", "r")
 
 
+T = 10
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
-for test_case in range(1, 10 + 1):
-    T = int(input())
+for test_case in range(1, T + 1):
+    t= int(input())
+    size =16
     
-    board = []
+    board= []
     
-    for _ in range(16):
-        line = list(map(int, input()))
+    for _ in range(size):
+        line = list(map(int,list(input())))
         board.append(line)
     
-    for i in range(16):
-        for j in range(16):
+    dir = [(0,-1),(0,1),(-1,0),(1,0)]
+    
+    for i in range(size):
+        for j in range(size):
             if board[i][j] == 2:
-                start = (i, j)
-            elif board[i][j] == 3:
-                end = (i, j)
-                
-    visited = [[0] * 16 for _ in range(16)]
+                start = [i,j]
+            if board[i][j] == 3:
+                end = [i,j]
     
-    answer = 0
-    dir = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-    def dfs(x, y):
+    visit = [[False] *size for _ in range(size)]
+    flag =False
+    
+    # print(end)
+    def dfs (x,y):
         
-        if (board[x][y] == 3):
-            global answer
-            answer = 1
-            return
-        
-        visited[x][y] = 1
-        
-        for dx, dy in dir:
-            nx =x +dx
-            ny =y+dy
+        global flag
+        # print(x,y)
+        visit[x][y] = True
+
+        for dx,dy in dir:
+            nx = x+dx
+            ny = y+dy
             
-            if (nx <0 or nx>=16) or (ny <0 or ny>=16):
+            
+            if(nx == end[0]) and ny == end[1]:
+                # print(nx,ny,end[0],end[1])
+                flag =True
+                return
+                
+            
+            if nx <0 or nx >=size:
                 continue
-            if (board[nx][ny] == 1) or (visited[nx][ny] == 1):
+            if ny<0 or ny >=size:
                 continue
-            dfs(nx, ny)
-        visited[x][y] = 0
-        
-        
-    dfs(start[0], start[1]) 
+            if board[nx][ny] == 1:
+                continue
+            if visit[nx][ny]:
+                continue
+            
+            dfs(nx,ny)
+            
     
-        
-    print(f'#{test_case} {answer}')
-    
+    dfs(start[0],start[1])
+    print(f'#{test_case} {int(flag)}')
+    # break
     
     # ///////////////////////////////////////////////////////////////////////////////////
     '''
-    최소 길이 없으니 dfs
-    백트래킹으로 효율적이게
-    2가시작 3이 도착
-    
-    도착불가 로직 확인
-        golval flag로 해당 위치 도착했는지 확인인
-    
 
         이 부분에 여러분의 알고리즘 구현이 들어갑니다.
 
