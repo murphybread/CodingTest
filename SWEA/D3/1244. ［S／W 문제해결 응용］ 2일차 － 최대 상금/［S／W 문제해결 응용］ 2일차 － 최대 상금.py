@@ -36,44 +36,48 @@ print(f)                                문자열 1개 출력하는 예제
 
 
 T = int(input())
-
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
-    num, m = map(int,input().split())
-    arr = list(str(num))
-    visited = []
-    max_value = 0
-    def dfs(current, count):
-        global max_value,m
-
+    case = input().split()
+    
+    num_list  =list(map(int,list(case[0])))
+    N = len(num_list)
+    K = int(case[1])
+    
+    
+    high = 0
+    s = set()
+    
+    
+    # print(num_list)
+    def dfs(curr,count):
+        global high, s
         
-        current_state_tuple = (current.copy(), count)
-
+        curr_tuple = (tuple(curr), count)
         
-        if current_state_tuple in visited:
+        if curr_tuple in s:
             return
         
-        visited.append(current_state_tuple)    
-        # print(current, count)
-                
-        if count == m:
-            curr_num = int(''.join(current))
-            # print("curr",curr_num)
-            if (curr_num > max_value):
-                max_value = curr_num
-            return current
+        s.add(curr_tuple)
         
-        n = len(current)
-        for i in range(n):
-            for j in range(i + 1, n):
-                current[i], current[j] = current[j] , current[i]
-                
-                dfs(current,count+1)
-                current[i], current[j] = current[j], current[i]
+        if count == K:
+            high = max(high ,   int(''.join(map(str,curr))) )
             
-    dfs(arr,0)
-
-    print(f'#{test_case} {max_value}')
+            return
+        
+        
+        for i in range(N):
+            for j in range(i+1,N):
+                curr[i], curr[j] = curr[j], curr[i]
+                dfs(curr,count+1)
+                
+                curr[i], curr[j] = curr[j], curr[i]
+    
+    
+    dfs(num_list,0)
+    # print(s, high)
+    print(f'#{test_case} {high}')
+    
     
     # ///////////////////////////////////////////////////////////////////////////////////
     '''
