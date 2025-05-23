@@ -37,61 +37,67 @@ print(f)                                문자열 1개 출력하는 예제
 
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
-
-
-decode = [[0,0,0,1,1,0,1], [0,0,1,1,0,0,1],[0,0,1,0,0,1,1],[0,1,1,1,1,0,1],[0,1,0,0,0,1,1],[0,1,1,0,0,0,1],[0,1,0,1,1,1,1],[0,1,1,1,0,1,1],[0,1,1,0,1,1,1],[0,0,0,1,0,1,1]]
 for test_case in range(1, T + 1):
-    N,M =map(int,input().split())
-
-    board = []
+    
+    N, M =map(int,input().split())
+    board=[]
+    
     for _ in range(N):
         line = list(map(int,input()))
         board.append(line)
-    
-    password = []
-    for j in range(N):
-        if (sum(board[j]) >0):
-            password.append(j)
+    # print(board)
+    start =[]
+    for i in range(N):
+        for j in range(M-1,-1,-1):
+            # print(i,j)
+            if board[i][j] == 1:
+                start =[i,j]
+                break
+        if start:
             break
-    # print(password)
+    # print(start)
     
-    check_line = board[password[0]]
-    for c in range(M-1,-1,-1):
-        # print(c)
-        if check_line[c] == 1:
-            end = c
-            break
-    real = check_line[c-55:c+1]
+    sp = board[i]
+    normal = board[i][start[1]-55:start[1]+1]
     
-    
-    num_result = []
-    for d in range(0,56,7):
-        each = real[d:d+7]
+    password = [[0,0,0,1,1,0,1],
+            [0,0,1,1,0,0,1],
+            [0,0,1,0,0,1,1],
+            [0,1,1,1,1,0,1],
+            [0,1,0,0,0,1,1],
+            [0,1,1,0,0,0,1],
+            [0,1,0,1,1,1,1],
+            [0,1,1,1,0,1,1],
+            [0,1,1,0,1,1,1],
+            [0,0,0,1,0,1,1]]
+    nums = []
+    for k in range(0,56,7):
+        part = normal[k:k+7]
+        # print(part)
         
-        for case in range(10):
-            if decode[case] == each:
-                num_result.append(case)
-    # print(num_result)
+        for i in range(10):
+            if password[i] == part:
+                nums.append(i)
+    # print(nums)
     
     odd = []
     even = []
-    for i in range(0,8,2):
-        odd.append(num_result[i])
-        even.append(num_result[i+1])
-    # print(odd,even)
     
-    if ( (sum(odd)*3+sum(even))%10 == 0):
+    for i in range(0,7,2):
+        odd.append(nums[i])
+        even.append(nums[i+1])
+    # print(odd)
+    # print(even)
+    
+    
+    result = sum(odd)*3 +sum(even)
+    if (result % 10) == 0:
         answer = sum(odd) + sum(even)
     else:
-        answer = 0
+        answer =0
+    
     print(f'#{test_case} {answer}')
-            
-            
-            
-        
-            
-        
-    # break
+                
     # ///////////////////////////////////////////////////////////////////////////////////
     '''
 
