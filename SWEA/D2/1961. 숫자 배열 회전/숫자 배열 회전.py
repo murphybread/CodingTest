@@ -39,58 +39,37 @@ T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
     N =int(input())
-    board = []
     
+    board= []
     for _ in range(N):
         line =list(map(int,input().split()))
         board.append(line)
+    
         
+    
     def rotate(matrix):
         
-        new = [[0]*N for _ in range(N)]
+        new = [ [0]*N for _ in range(N)]
+        
         for i in range(N):
             for j in range(N):
-                new[j][N-1-i]  = matrix[i][j]
+                new[j][N-1-i] = matrix[i][j]
+        
         return new
     
     one =rotate(board)
     two = rotate(one)
-    three = rotate(two)
-    
-    
-    # print(one)
-    
-    # print(two)
-    
-    # print(three)
+    three =rotate(two)
     
     print(f'#{test_case}')
-    
-    
-    
     for i in range(N):
+        print(''.join(list(map(str,one[i]))), ''.join(list(map(str,two[i]))),''.join(list(map(str,three[i]))) , end=' ')
         
+        print('')
         
-        one_str = ''.join(map(str,one[i]))
-        two_str = ''.join(map(str,two[i]))
-        three_str = ''.join(map(str,three[i]))
-        print(f'{one_str} {two_str} {three_str}')
-    
-    # break       
     # ///////////////////////////////////////////////////////////////////////////////////
     '''
-    
-        
-    top to bottom
-    i,0 -> 0,N-1-i
-    i,1 -> 1,N-1-i
-    
-    0,N -> N-N
-    11111
-    11111
-    11111
-    11111
-    11111
+
         이 부분에 여러분의 알고리즘 구현이 들어갑니다.
 
     '''
