@@ -33,35 +33,45 @@ print(f)                                문자열 1개 출력하는 예제
 아래 구문을 사용하기 위해서는 import sys가 필요합니다.
 단, 채점을 위해 코드를 제출하실 때에는 반드시 아래 구문을 지우거나 주석 처리 하셔야 합니다.
 '''
-#import sys
-#sys.stdin = open("input.txt", "r")
+
 
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
-    N = int(input())
+    N =int(input())
     
-    board = []
+    
+    board= []
     for _ in range(N):
-        line = list(map(int,input()))
-        board.append(line)
-    mid = N // 2
-    answer = 0
+        board.append(list(map(int,list(input()))))
+        
+    # print(board)
+    mid = N//2
+    answer=  0
     for i in range(N):
-        if (i  <= mid):
-            part = board[i][mid-i:mid+i+1] 
-            # print(i,part, sum(part))
-            answer += sum(part)
+        
+        if (i <=mid):
+            
+            for j in range(mid-i,mid+i+1):
+                # print(i,j)
+                
+                
+                answer += board[i][j]
         else:
-            part = board[i][mid-(N-i-1):mid+(N-i-1)+1] 
-            # print(i,part, sum(part))
-            answer += sum(part)
-    print(f"#{test_case} {answer}")
-    
+            
+            for j in range(mid-(N-1-i) , mid+(N-1-i)+1):
+                # print("bottom", i,j)
+                answer += board[i][j]
+    print(f'#{test_case} {answer}')
+        
+                
+            
+            
+        
     # ///////////////////////////////////////////////////////////////////////////////////
     '''
-    가운데 열을 중심을 i번째 행에서 +i개 양옆으로
-    늘어나다가 줄어들어야함
+    N//2
+
         이 부분에 여러분의 알고리즘 구현이 들어갑니다.
 
     '''
