@@ -1,7 +1,13 @@
-#include <stdio.h>
-int main() {
-	char input[100];
-	scanf("%s",input);
-	printf("Hello Goorm! Your input is %s",input);
-	return 0;
-}
+// Run by Node.js
+const readline = require('readline');
+
+(async () => {
+	let rl = readline.createInterface({ input: process.stdin });
+	
+	for await (const line of rl) {
+		console.log(line.length);
+		rl.close();
+	}
+	
+	process.exit();
+})();
